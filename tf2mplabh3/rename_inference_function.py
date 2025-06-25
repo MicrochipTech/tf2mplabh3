@@ -1,14 +1,27 @@
 import re
 import shutil
 
-def rename_entry_function(c_filename, backup=False):
+verbosity=0
+
+def verbose(msg):
+    global verbosity
+    if verbosity==1:
+        print(msg)
+
+
+def rename_entry_function(c_filename, backup=False, verbosity_level=0):
     """
     Renames the 'entry' function to 'model_entry' in the C model file to avoid conflics with MPLAB Harmony v3 Project.
 
     Args:
         c_filename (str): Path to the C source file to modify.
         backup (bool): If True, saves a backup of the original file with a .bak extension.
+        verbosity_level: 0 for almost no logs, 1 for full logs
     """
+    global verbosity
+    verbosity=verbosity_level
+
+    verbose("[rename_inference_function]***Reading the C model file")
     with open(c_filename, 'r') as f:
         code = f.read()
 
@@ -18,9 +31,10 @@ def rename_entry_function(c_filename, backup=False):
     if backup:
         shutil.copyfile(c_filename, c_filename + '.bak')
 
+    verbose("[rename_inference_function]***Writing in the C model file")
     with open(c_filename, 'w') as f:
         f.write(code_new)
 
-    print(f"Renaming complete in {c_filename}.")
+    print(f"[rename_inference_function]***Renaming complete in {c_filename}.")
     if backup:
-        print(f"Backup saved as {c_filename}.bak")
+        print(f"[rename_inference_function]***Backup saved as {c_filename}.bak")
