@@ -92,7 +92,7 @@ python3 -m tf2mplabh3 -m path/to/model -v 1
 ## How to use the hardware capabilities to accelerate inference:
 
 In order to ensure an optimized inference time, leverage the features of the [MPLAB® XC-32 Compilers](https://www.microchip.com/en-us/tools-resources/develop/mplab-xc-compilers)
-by activating the third level of compilation in your MPLAB® X project. Doing this ensures a extended use of the hardware capabilities of the 
+by activating the third level of compilation in your MPLAB® X project. Doing this ensures an extended use of the hardware capabilities of the 
 device.
 
 As shown in the example image below:
