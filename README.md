@@ -41,7 +41,7 @@ It enables you to convert TensorFlow models to C code, ready for seamless integr
 ## Installation
 Clone the repository and run the installation script:
 ```bash
-git clone --recursive https://github.com/yourusername/tf2mplabh3.git
+git clone --recursive https://github.com/MicrochipTech/tf2mplabh3.git
 cd tf2mplabh3
 ./install.sh
 ```
