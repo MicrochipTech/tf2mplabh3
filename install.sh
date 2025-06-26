@@ -134,5 +134,5 @@ make onnx2c
 
 echo "onnx2c built successfully."
 
-eccho "Dependencies installed and built successfully"
+echo "Dependencies installed and built successfully"
 echo "Do not forget to activate the virtual environment by running source .venv/bin/activate"
