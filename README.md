@@ -74,6 +74,7 @@ python3 -m tf2mplabh3 [options]
 | `--signature_def`           | Signature def key (e.g., `serving_default`) | `None`                                                        |
 | `--onnx2c`                  | Path to the onnx2c executable               | `c_deps/onnx2c/build/onnx2c`                                  |
 | `-v`, `--verbosity`         | Verbosity level (`0`=quiet, `1`=all logs)   | `0`                                                           |
+| `--overwrite`               | Overwrite existing ONNX or C model files    | `Not used`                                                    |
 
 ---
 ## Examples
