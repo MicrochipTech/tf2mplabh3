@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/Workspace/TechSupport/Mantra/uart_echo_interrupt_swapna/uart_echo_interrupt_swapna/uart_echo_interrupt/firmware/src/main.c</file>
+            <file>file:/C:/Workspace/TechSupport/Mantra/uart_echo_interrupt_swapna/uart_echo_interrupt_swapna/uart_echo_interrupt/firmware/src/config/sama5d29_curiosity/peripheral/uart/plib_uart0.h</file>
+            <file>file:/C:/Workspace/TechSupport/Mantra/uart_echo_interrupt_swapna/uart_echo_interrupt_swapna/uart_echo_interrupt/firmware/src/config/sama5d29_curiosity/initialization.c</file>
+            <file>file:/C:/Workspace/TechSupport/Mantra/uart_echo_interrupt_swapna/uart_echo_interrupt_swapna/uart_echo_interrupt/firmware/src/config/sama5d29_curiosity/peripheral/clk/plib_clk.c</file>
+        </group>
+    </open-files>
+</project-private>
