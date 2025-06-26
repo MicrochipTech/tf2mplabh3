@@ -113,9 +113,9 @@ The following table shows the inference time for the example model (`mobilenet-v
 | Optimization Level | Inference Time (ms) | Notes/Flags Used   |
 |--------------------|---------------------|--------------------|
 | None               | 7536.600            | No optimization    |
-| -O1                | 1731.100            | Basic optimization |
-| -O2                | 1371.700            | More optimization  |
-| -O3                | 1190.00             | Optimize for speed |
+| -O1                | 1730.550            | Basic optimization |
+| -O2                | 1368.060            | More optimization  |
+| -O3                | 1188.790            | Optimize for speed |
 | -Os                | 1382.300            | Optimize for size  |
 
 **Note:**  
