@@ -22,6 +22,8 @@ It enables you to convert TensorFlow models to C code, ready for seamless integr
 - [Usage](#usage)
 - [Arguments](#arguments)
 - [Examples](#examples)
+- [How to use the hardware capabilities to accelerate inference](#how-to-use-the-hardware-capabilities-to-accelerate-inference)
+- [Benchmarking](#benchmarking)
 - [License](#license)
 - [Acknowledgments](#acknowledgments)
 
@@ -87,6 +89,39 @@ python3 -m tf2mplabh3
 ```bash
 python3 -m tf2mplabh3 -m path/to/model -v 1
 ```
+## How to use the hardware capabilities to accelerate inference:
+
+In order to ensure an optimized inference time, leverage the features of the [MPLAB® XC-32 Compilers](https://www.microchip.com/en-us/tools-resources/develop/mplab-xc-compilers)
+by activating the third level of compilation in your MPLAB® X project. Doing this ensures a extended use of the hardware capabilities of the 
+device.
+
+As shown in the example image below:
+
+![MPLAB Screenshot](doc/O3_level_example.png)
+
+## Benchmarking
+
+The following table shows the inference time for the example model (`mobilenet-v2-tensorflow2-035-128-classification-v2`) converted and run with different optimization levels.
+
+**All benchmarks were performed on:**
+
+- **Hardware:** Microchip [SAMA5D29 Curiosity Development  Board](https://www.microchip.com/en-us/development-tool/ev07r15a)
+- **CPU:** 1x ARM® Cortex®-A5
+- **Clock Frequency:** 498 MHz
+- **Compiler:** XC32 v4.30
+
+| Optimization Level | Inference Time (ms) | Notes/Flags Used   |
+|--------------------|---------------------|--------------------|
+| None               | 7536.600            | No optimization    |
+| -O1                | 1731.100            | Basic optimization |
+| -O2                | 1371.700            | More optimization  |
+| -O3                | 1190.00             | Optimize for speed |
+| -Os                | 1382.300            | Optimize for size  |
+
+**Note:**  
+Inference time was measured as the average over 100 runs.  
+Results may vary depending on compiler version, memory configuration, and other system activity.
+
 ## License
 
 [Apache-2.0 License](LICENSE)
