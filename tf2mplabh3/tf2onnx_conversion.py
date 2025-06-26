@@ -11,6 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+from .utils import color_text
 
 import tensorflow as tf
 import subprocess
@@ -20,7 +21,7 @@ verbosity=0
 def verbose(msg):
     global verbosity
     if verbosity==1:
-        print(msg)
+        print(color_text(msg,"blue"))
 
 def tf2onnx_converter(
     saved_model_dir="examples/mobilenet-v2-tensorflow2-035-128-classification-v2",
@@ -42,12 +43,12 @@ def tf2onnx_converter(
     global verbosity
     verbosity=verbosity_level
 
-    verbose("[tf2onnx_conversion]***Checking the model file")
+    verbose("[TF2ONNX_CONVERSION] Checking the model file")
     # Load the model (optional, for validation)
     try:
         model = tf.saved_model.load(saved_model_dir)
     except Exception as e:
-        print(f"[tf2onnx_conversion]***Error loading SavedModel: {e}")
+        print(f"[TF2ONNX_CONVERSION] Error loading SavedModel: {e}")
         return
 
     # Build the tf2onnx command
@@ -61,15 +62,15 @@ def tf2onnx_converter(
     if signature_def:
         cmd.extend(["--signature-def", signature_def])
 
-    verbose("[tf2onnx_conversion]***Starting tf2onnx conversion")
+    verbose("[TF2ONNX_CONVERSION] Starting tf2onnx conversion")
     # Run the conversion
     result = subprocess.run(cmd, capture_output=True, text=True)
 
 
-    verbose("[tf2onnx_conversion]***STDOUT:"+ result.stdout)
-    verbose("[tf2onnx_conversion]***STDERR:"+ result.stderr)
+    verbose("[TF2ONNX_CONVERSION] STDOUT:"+ result.stdout)
+    verbose("[TF2ONNX_CONVERSION] STDERR:"+ result.stderr)
 
     if result.returncode != 0:
-        print("[tf2onnx_conversion]***tf2onnx conversion failed.")
+        print("[TF2ONNX_CONVERSION] tf2onnx conversion failed.")
     else:
-        print(f"[tf2onnx_conversion]***ONNX model saved to {onnx_model_path}")
+        print(f"[TF2ONNX_CONVERSION] ONNX model saved to {onnx_model_path}")

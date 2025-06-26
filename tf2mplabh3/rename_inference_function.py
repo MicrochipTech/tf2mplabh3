@@ -14,13 +14,14 @@
 
 import re
 import shutil
+from .utils import color_text
 
 verbosity=0
 
 def verbose(msg):
     global verbosity
     if verbosity==1:
-        print(msg)
+        print(color_text(msg,"blue"))
 
 
 def rename_entry_function(c_filename, backup=False, verbosity_level=0):
@@ -35,7 +36,7 @@ def rename_entry_function(c_filename, backup=False, verbosity_level=0):
     global verbosity
     verbosity=verbosity_level
 
-    verbose("[rename_inference_function]***Reading the C model file")
+    verbose("[RENAME_INFERENCE_FUNCTION] Reading the C model file")
     with open(c_filename, 'r') as f:
         code = f.read()
 
@@ -45,10 +46,10 @@ def rename_entry_function(c_filename, backup=False, verbosity_level=0):
     if backup:
         shutil.copyfile(c_filename, c_filename + '.bak')
 
-    verbose("[rename_inference_function]***Writing in the C model file")
+    verbose("[RENAME_INFERENCE_FUNCTION] Writing in the C model file")
     with open(c_filename, 'w') as f:
         f.write(code_new)
 
-    print(f"[rename_inference_function]***Renaming complete in {c_filename}.")
+    print(f"[RENAME_INFERENCE_FUNCTION] Renaming complete in {c_filename}.")
     if backup:
-        print(f"[rename_inference_function]***Backup saved as {c_filename}.bak")
+        print(f"[RENAME_INFERENCE_FUNCTION] Backup saved as {c_filename}.bak")
