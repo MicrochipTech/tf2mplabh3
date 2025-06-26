@@ -1,3 +1,21 @@
+import threading
+import time
+
+def spinner(stop_event, completed_flag):
+    spinner_chars = "|/-\\"
+    idx = 0
+    while not stop_event.is_set():
+        msg = color_text(f"\r[MAIN] Converting... {spinner_chars[idx % len(spinner_chars)]}", "green")
+        print(msg, end='', flush=True)
+        idx += 1
+        time.sleep(0.1)
+    # Print appropriate message based on completion status
+    if completed_flag[0]:
+        print(color_text("\r[MAIN] Conversion complete!", "green"), end='\n', flush=True)
+    else:
+        print(color_text("\r[MAIN] Conversion interrupted", "red"), end='\n', flush=True)
+
+
 def color_text(text, color):
     color_codes = {
         "black": "30",
