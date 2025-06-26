@@ -21,7 +21,7 @@ verbosity=0
 def verbose(msg):
     global verbosity
     if verbosity==1:
-        print(color_text(msg,"blue"),flush=True)
+        print(color_text(msg,"yellow"),flush=True)
 
 
 def rename_entry_function(c_filename, backup=False, verbosity_level=0):
@@ -50,6 +50,6 @@ def rename_entry_function(c_filename, backup=False, verbosity_level=0):
     with open(c_filename, 'w') as f:
         f.write(code_new)
 
-    print(f"[RENAME_INFERENCE_FUNCTION] Renaming complete in {c_filename}.",flush=True)
+    print(color_text(f"[RENAME_INFERENCE_FUNCTION] Renaming complete in {c_filename}.","green"),flush=True)
     if backup:
-        print(f"[RENAME_INFERENCE_FUNCTION] Backup saved as {c_filename}.bak",flush=True)
+        print(color_text(f"[RENAME_INFERENCE_FUNCTION] Backup saved as {c_filename}.bak","green"),flush=True)
