@@ -18,7 +18,7 @@ def spinner(stop_event, completed_flag):
     spinner_chars = "|/-\\"
     idx = 0
     while not stop_event.is_set():
-        msg = color_text(f"\r[MAIN] Converting... {spinner_chars[idx % len(spinner_chars)]}", "green")
+        msg = color_text(f"\r[MAIN] Converting... {spinner_chars[idx % len(spinner_chars)]}\n", "green")
         print(msg, end='', flush=True)
         idx += 1
         time.sleep(0.1)
