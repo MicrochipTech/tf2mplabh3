@@ -14,7 +14,7 @@ The provided `main.c` file contains a basic code sample that:
 - Benchmarks the inference time over the number of repetitions defined by `#define NUM_RUNS 100`
 - Prints the inference times
 
-**The inference of the model is started by running the function `model_entry()` from the `<model.c>` file.**
+**The inference of the model is started by running the function `model_entry()` located at the bottom of the `<model.c>` file.**
 
 > **Note:**  
 > Depending on your custom model’s characteristics, you may need to change the input format and adapt the code logic accordingly.
