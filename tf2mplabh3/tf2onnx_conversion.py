@@ -21,7 +21,7 @@ verbosity=0
 def verbose(msg):
     global verbosity
     if verbosity==1:
-        print(color_text(msg,"blue"))
+        print(color_text(msg,"blue"),flush=True)
 
 def tf2onnx_converter(
     saved_model_dir="examples/mobilenet-v2-tensorflow2-035-128-classification-v2",
@@ -48,7 +48,7 @@ def tf2onnx_converter(
     try:
         model = tf.saved_model.load(saved_model_dir)
     except Exception as e:
-        print(f"[TF2ONNX_CONVERSION] Error loading SavedModel: {e}")
+        print(f"[TF2ONNX_CONVERSION] Error loading SavedModel: {e}",flush=True)
         return
 
     # Build the tf2onnx command
@@ -71,6 +71,6 @@ def tf2onnx_converter(
     verbose("[TF2ONNX_CONVERSION] STDERR:"+ result.stderr)
 
     if result.returncode != 0:
-        print("[TF2ONNX_CONVERSION] tf2onnx conversion failed.")
+        print("[TF2ONNX_CONVERSION] tf2onnx conversion failed.",flush=True)
     else:
-        print(f"[TF2ONNX_CONVERSION] ONNX model saved to {onnx_model_path}")
+        print(f"[TF2ONNX_CONVERSION] ONNX model saved to {onnx_model_path}",flush=True)

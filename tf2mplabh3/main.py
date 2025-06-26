@@ -24,7 +24,7 @@ verbosity=0
 def verbose(msg):
     global verbosity
     if verbosity==1:
-        print(color_text(msg,"blue"))
+        print(color_text(msg,"blue"),flush=True)
 
 
 
@@ -77,10 +77,10 @@ def main():
     verbose("[MAIN] Checking if the model files already exist.")
     if not args.overwrite:
         if os.path.exists(args.onnx_model):
-            print(f"[ERROR] ONNX model file '{args.onnx_model}' already exists. Use --overwrite to overwrite.")
+            print(f"[ERROR] ONNX model file '{args.onnx_model}' already exists. Use --overwrite to overwrite.",flush=True)
             sys.exit(1)
         if os.path.exists(args.c_model_file):
-            print(f"[ERROR] C model file '{args.c_model_file}' already exists. Use --overwrite to overwrite.")
+            print(f"[ERROR] C model file '{args.c_model_file}' already exists. Use --overwrite to overwrite.",flush=True)
             sys.exit(1)
 
     verbose("[MSG] Importing conversion and renaming functions")
@@ -88,7 +88,7 @@ def main():
     from .tf2onnx_conversion import tf2onnx_converter
 
     # Convert TensorFlow model to ONNX
-    print("[MAIN]  Starting Tensorflow to ONNX Conversion")
+    print("[MAIN]  Starting Tensorflow to ONNX Conversion",flush=True)
     tf2onnx_converter(args.model, args.onnx_model, args.tag, args.signature_def,verbosity)
 
     verbose("[MAIN] Ensuring the parent directory of the C model file exists")
@@ -97,7 +97,7 @@ def main():
     if parent_dir and not os.path.exists(parent_dir):
         os.makedirs(parent_dir, exist_ok=True)
 
-    print("[MAIN]  Starting ONNX to C Conversion")
+    print("[MAIN]  Starting ONNX to C Conversion",flush=True)
     # Convert ONNX model to C file using onnx2c
     with open(args.c_model_file, "w") as c_file:
         result = subprocess.run(
@@ -107,15 +107,15 @@ def main():
             text=True
         )
     if result.returncode != 0:
-        print("[MAIN] onnx2c failed:", result.stderr)
+        print("[MAIN] onnx2c failed:", result.stderr,flush=True)
         sys.exit(result.returncode)
 
     # Optionally, rename the inference function in the generated C file
     verbose("[MAIN] Renaming the entry function inside the C file")
     rename_entry_function(args.c_model_file,verbosity)
-    print("[MAIN]  Conversion from Tensorflow to C file is successful.")
-    print("[MAIN]  Import the "+args.c_model_file+"file into an MPLAB(R) Harmony v3 Project")
-    print("[MAIN]  See the examples/mplab directory")
+    print("[MAIN]  Conversion from Tensorflow to C file is successful.",flush=True)
+    print("[MAIN]  Import the "+args.c_model_file+"file into an MPLAB(R) Harmony v3 Project.",flush=True)
+    print("[MAIN]  See the examples/mplab directory",flush=True)
 
 
 
