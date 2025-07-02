@@ -24,6 +24,8 @@ It enables you to convert TensorFlow models to C code, ready for seamless integr
 - [Examples](#examples)
 - [How to use the hardware capabilities to accelerate inference](#how-to-use-the-hardware-capabilities-to-accelerate-inference)
 - [Benchmarking](#benchmarking)
+  - [Inference Time](#inference-time)
+  - [Model Output Consistency Metrics](#model-output-consistency-metrics)
 - [License](#license)
 - [Acknowledgments](#acknowledgments)
 
@@ -100,15 +102,15 @@ As shown in the example image below:
 ![MPLAB Screenshot](doc/O3_level_example.png)
 
 ## Benchmarking
-
-The following table shows the inference time for the example model (`mobilenet-v2-tensorflow2-035-128-classification-v2`) converted and run with different optimization levels.
-
 **All benchmarks were performed on:**
 
 - **Hardware:** Microchip [SAMA5D29 Curiosity Development  Board](https://www.microchip.com/en-us/development-tool/ev07r15a)
 - **CPU:** 1x ARM® Cortex®-A5
 - **Clock Frequency:** 498 MHz
 - **Compiler:** XC32 v4.30
+
+### Inference time
+The following table shows the inference time for the example model (`mobilenet-v2-tensorflow2-035-128-classification-v2`) converted and run with different optimization levels.
 
 | Optimization Level | Inference Time (ms) | Notes/Flags Used   |
 |--------------------|---------------------|--------------------|
@@ -121,6 +123,27 @@ The following table shows the inference time for the example model (`mobilenet-v
 **Note:**  
 Inference time was measured as the average over 100 runs.  
 Results may vary depending on compiler version, memory configuration, and other system activity.
+
+### Model Output Consistency Metrics
+
+The following table summarizes the results of comparing the logits (raw model outputs) produced by the TensorFlow reference Model and the compiled C model file, running on the target.
+This comparison was performed to validate the integrity and robustness of the model conversion and deployment process.
+
+**All results below were obtained with the MPLAB Harmony v3 compiled at the `-O3` optimization level.**
+
+| Metric                    | Value        | Description                                                                           |
+|---------------------------|--------------|---------------------------------------------------------------------------------------|
+| Number of images compared | 1000         | Total images used for validation                                                      |
+| Mean Absolute Error (MAE) | 4.56 × 10⁻⁶  | Average absolute difference per logit between host and target                         |
+| Mean Squared Error (MSE)  | 3.58 × 10⁻¹¹ | Average squared difference per logit                                                  |
+| Maximum Absolute Error    | 5.53 × 10⁻⁵  | Largest absolute difference observed for any logit                                    |
+| Mean Cosine Similarity    | 1.000000     | Average cosine similarity between host and target logit vectors (1.0 = perfect match) |
+| Top-1 Agreement           | 100.00%      | Percentage of images where the predicted class (highest logit) matches                |
+| Top-5 Agreement           | 100.00%      | Percentage of images where the top 5 predicted classes match                          |
+
+**Interpretation:**  
+These results demonstrate that the embedded model’s outputs are virtually identical to the host reference, with only negligible differences attributable to floating-point precision. Both Top-1 and Top-5 classification results are in perfect agreement, confirming the correctness and robustness of the deployment at the `-O3` optimization level.
+
 
 ## License
 
