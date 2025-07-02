@@ -1,5 +1,11 @@
 #  TensorFlow to MPLAB® Harmony v3 Model Converter
 
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
+[![Python](https://img.shields.io/badge/python-3.8%2B-blue.svg)](https://www.python.org/downloads/)
+[![Issues](https://img.shields.io/github/issues/MicrochipTech/tf2mplabh3.svg)](https://github.com/MicrochipTech/tf2mplabh3/issues)
+[![GitHub stars](https://img.shields.io/github/stars/MicrochipTech/tf2mplabh3.svg)](https://github.com/MicrochipTech/tf2mplabh3/stargazers)
+
+
 **Welcome to tf2mplabh3!**
 
 This project is proudly developed and maintained by **Microchip Technology Inc.**  
