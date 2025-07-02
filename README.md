@@ -152,10 +152,10 @@ This comparison was performed to validate the integrity and robustness of the mo
 | Mean Cosine Similarity    | 1.000000     | Average cosine similarity between host and target logit vectors (1.0 = perfect match) |
 | Top-1 Agreement           | 100.00%      | Percentage of images where the predicted class (highest logit) matches                |
 | Top-5 Agreement           | 100.00%      | Percentage of images where the top 5 predicted classes match                          |
+| 0-1 Loss (Argmax)         | 0.000        | Fraction of images where the predicted class differ between the host and target       |
 
 **Interpretation:**  
-These results demonstrate that the converted model’s outputs are virtually identical to the initial example, with only negligible differences attributable to floating-point precision. Both Top-1 and Top-5 classification results are in perfect agreement, confirming the correctness and robustness of the deployment at the `-O3` optimization level.
-
+These results demonstrate that the converted model’s outputs are virtually identical to the initial example, with only negligible differences attributable to floating-point precision. Both Top-1 and Top-5 classification results are in perfect agreement, and the 0-1 loss confirms that there were no mismatches in predicted classes between the host and target. This validates the correctness and robustness of the deployment at the -O3 optimization level.
 ---
 
 ## License
