@@ -97,6 +97,7 @@ python3 -m tf2mplabh3
 ```bash
 python3 -m tf2mplabh3 -m path/to/model -v 1
 ```
+---
 ## How to Use the Hardware Capabilities to Accelerate Inference:
 
 In order to ensure an optimized inference time, leverage the features of the [MPLAB® XC-32 Compilers](https://www.microchip.com/en-us/tools-resources/develop/mplab-xc-compilers)
@@ -106,6 +107,8 @@ device.
 As shown in the example image below:
 
 ![MPLAB Screenshot](doc/O3_level_example.png)
+
+---
 
 ## Benchmarking
 **All benchmarks were performed on:**
@@ -152,6 +155,7 @@ This comparison was performed to validate the integrity and robustness of the mo
 **Interpretation:**  
 These results demonstrate that the converted model’s outputs are virtually identical to the initial example, with only negligible differences attributable to floating-point precision. Both Top-1 and Top-5 classification results are in perfect agreement, confirming the correctness and robustness of the deployment at the `-O3` optimization level.
 
+---
 
 ## License
 
