@@ -161,6 +161,8 @@ These results demonstrate that the converted model’s outputs are virtually ide
 
 [Apache-2.0 License](LICENSE)
 
+---
+
 ## Acknowledgments
 
 - [tf2onnx](https://github.com/onnx/tensorflow-onnx)
