@@ -22,7 +22,7 @@ It enables you to convert TensorFlow models to C code, ready for seamless integr
 - [Usage](#usage)
 - [Arguments](#arguments)
 - [Examples](#examples)
-- [How to use the hardware capabilities to accelerate inference](#how-to-use-the-hardware-capabilities-to-accelerate-inference)
+- [How to Use the Hardware Capabilities to Accelerate Inference](#how-to-use-the-hardware-capabilities-to-accelerate-inference)
 - [Benchmarking](#benchmarking)
   - [Inference Time](#inference-time)
   - [Model Output Consistency Metrics](#model-output-consistency-metrics)
@@ -91,7 +91,7 @@ python3 -m tf2mplabh3
 ```bash
 python3 -m tf2mplabh3 -m path/to/model -v 1
 ```
-## How to use the hardware capabilities to accelerate inference:
+## How to Use the Hardware Capabilities to Accelerate Inference:
 
 In order to ensure an optimized inference time, leverage the features of the [MPLAB® XC-32 Compilers](https://www.microchip.com/en-us/tools-resources/develop/mplab-xc-compilers)
 by activating the third level of compilation in your MPLAB® X project. Doing this ensures an extended use of the hardware capabilities of the 
@@ -109,8 +109,10 @@ As shown in the example image below:
 - **Clock Frequency:** 498 MHz
 - **Compiler:** XC32 v4.30
 
+**The model used for the benchmarking operations is a [`mobilenet-v2-tensorflow2-035-128-classification-v2`](https://www.kaggle.com/models/google/mobilenet-v2) model.**
+
 ### Inference time
-The following table shows the inference time for the example model (`mobilenet-v2-tensorflow2-035-128-classification-v2`) converted and run with different optimization levels.
+The following table shows the inference time for the example model converted and run with different optimization levels.
 
 | Optimization Level | Inference Time (ms) | Notes/Flags Used   |
 |--------------------|---------------------|--------------------|
@@ -126,7 +128,7 @@ Results may vary depending on compiler version, memory configuration, and other 
 
 ### Model Output Consistency Metrics
 
-The following table summarizes the results of comparing the logits (raw model outputs) produced by the TensorFlow reference Model and the compiled C model file, running on the target.
+The following table summarizes the results of comparing the logits (raw model outputs) produced by the TensorFlow example model and the compiled `model.c` file, running on the target.
 This comparison was performed to validate the integrity and robustness of the model conversion and deployment process.
 
 **All results below were obtained with the MPLAB Harmony v3 compiled at the `-O3` optimization level.**
@@ -142,7 +144,7 @@ This comparison was performed to validate the integrity and robustness of the mo
 | Top-5 Agreement           | 100.00%      | Percentage of images where the top 5 predicted classes match                          |
 
 **Interpretation:**  
-These results demonstrate that the embedded model’s outputs are virtually identical to the host reference, with only negligible differences attributable to floating-point precision. Both Top-1 and Top-5 classification results are in perfect agreement, confirming the correctness and robustness of the deployment at the `-O3` optimization level.
+These results demonstrate that the converted model’s outputs are virtually identical to the initial example, with only negligible differences attributable to floating-point precision. Both Top-1 and Top-5 classification results are in perfect agreement, confirming the correctness and robustness of the deployment at the `-O3` optimization level.
 
 
 ## License
