@@ -67,7 +67,16 @@ def main():
             '--overwrite', action='store_true',
             help="Overwrite existing ONNX or C model files. By default, existing files are not overwritten."
         )
-
+        parser.add_argument(
+            '-quant', '--int8_quantize',
+            default=0,
+            help="Quantize on the fly from FP32 to INT8"
+        )
+        parser.add_argument(
+            '-onnx_quant', '--onnx_quant_model',
+            default=os.path.join(PROJECT_ROOT, "examples", "model_int8.onnx"),
+            help="Path where to store the ONNX Model File"
+        )
         args = parser.parse_args()
         global verbosity
         verbosity = args.verbosity
@@ -97,6 +106,13 @@ def main():
         # Convert TensorFlow model to ONNX
         print(color_text("[MAIN] Starting Tensorflow to ONNX Conversion", "green"), flush=True)
         tf2onnx_converter(args.model, args.onnx_model, args.tag, args.signature_def, verbosity)
+        onnx_model_to_convert=args.onnx_model
+
+        if bool(args.int8_quantize):
+            from .onnx_quantization import quantize_and_compare_nodes
+            print(color_text("[MAIN] Starting ONNX FP32 to ONNX INT8 Quantization", "green"), flush=True)
+            quantize_and_compare_nodes(args.onnx_model,args.onnx_quant_model,verbosity_level=verbosity)
+            onnx_model_to_convert=args.onnx_quant_model
 
         verbose("[MAIN] Ensuring the parent directory of the C model file exists")
         parent_dir = os.path.dirname(args.c_model_file)
@@ -111,7 +127,7 @@ def main():
         t.start()
         with open(args.c_model_file, "w") as c_file:
             process = subprocess.Popen(
-                [args.onnx2c, args.onnx_model],
+                [args.onnx2c, onnx_model_to_convert],
                 stdout=c_file,
                 stderr=subprocess.PIPE,
                 text=True
