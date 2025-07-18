@@ -42,6 +42,7 @@ It enables you to convert TensorFlow models to C code, ready for seamless integr
 - Convert TensorFlow SavedModel to C code
 - Easy CLI interface
 - Verbosity control for logging
+- Support for int8 quantization on the fly
 - Ready for integration with MPLAB Harmony v3
 
 ---
@@ -76,16 +77,18 @@ python3 -m tf2mplabh3 [options]
 
 ## Arguments
 
-| Argument                    | Description                                 | Default                                                       |
-|-----------------------------|---------------------------------------------|---------------------------------------------------------------|
-| `-m`, `--model`             | Path to TensorFlow SavedModel directory     | `examples/mobilenet-v2-tensorflow2-035-128-classification-v2` |
-| `-onnx`, `--onnx_model`     | Path to output ONNX intermediate model file | `examples/model.onnx`                                         |
-| `-c_file`, `--c_model_file` | Path to output C model file                 | `examples/model.c`                                            |
-| `--tag`                     | SavedModel tag (e.g., `serve`)              | `None`                                                        |
-| `--signature_def`           | Signature def key (e.g., `serving_default`) | `None`                                                        |
-| `--onnx2c`                  | Path to the onnx2c executable               | `c_deps/onnx2c/build/onnx2c`                                  |
-| `-v`, `--verbosity`         | Verbosity level (`0`=quiet, `1`=all logs)   | `0`                                                           |
-| `--overwrite`               | Overwrite existing ONNX or C model files    | `Not used`                                                    |
+| Argument                            | Description                                                    | Default                                                       |
+|-------------------------------------|----------------------------------------------------------------|---------------------------------------------------------------|
+| `-m`, `--model`                     | Path to TensorFlow SavedModel directory                        | `examples/mobilenet-v2-tensorflow2-035-128-classification-v2` |
+| `-onnx`, `--onnx_model`             | Path to output ONNX intermediate model file                    | `examples/model.onnx`                                         |
+| `-c_file`, `--c_model_file`         | Path to output C model file                                    | `examples/model.c`                                            |
+| `--tag`                             | SavedModel tag (e.g., `serve`)                                 | `None`                                                        |
+| `--signature_def`                   | Signature def key (e.g., `serving_default`)                    | `None`                                                        |
+| `--onnx2c`                          | Path to the onnx2c executable                                  | `c_deps/onnx2c/build/onnx2c`                                  |
+| `-v`, `--verbosity`                 | Verbosity level (`0`=quiet, `1`=all logs)                      | `0`                                                           |
+| `--overwrite`                       | Overwrite existing ONNX or C model files                       | `Not used`                                                    |
+| `-quant`, `--int8_quantize`         | Quantize the original model to int8 weights on the fly         | `0`                                                           |
+| `-onnx_quant`, `--onnx_quant_model` | Path to output the int8 quantized ONNX intermediate model file | `examples/model_int8.onnx`                                    |
 
 ---
 ## Examples
@@ -138,7 +141,7 @@ Results may vary depending on compiler version, memory configuration, and other 
 
 ### Model Output Consistency Metrics
 
-The following table summarizes the results of comparing the logits (raw model outputs) produced by the TensorFlow example model and the compiled `model.c` file, running on the target.
+The following table summarizes the results of comparing the logits (raw model outputs) produced by the TensorFlow example model and the compiled, not quantized, `model.c` file, running on the target.
 This comparison was performed to validate the integrity and robustness of the model conversion and deployment process.
 
 **All results below were obtained with the MPLAB Harmony v3 compiled at the `-O3` optimization level.**
