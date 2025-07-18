@@ -81,7 +81,13 @@ if ! pip show tensorflow | grep -q Version; then
 else
     echo "TensorFlow is already installed."
 fi
-
+# Install onnxruntime if not already installed
+if ! pip show onnxruntime | grep -q Version; then
+    echo "Installing onnxruntime..."
+    pip install onnxruntime==1.22.0
+else
+    echo "onnxruntime is already installed."
+fi
 # Install tf2onnx if not already installed
 if ! pip show tf2onnx | grep -q Version; then
     echo "Installing tf2onnx..."
